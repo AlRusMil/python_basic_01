@@ -9,7 +9,6 @@ products = []
 dict_analytics = {}
 
 product_number = 0
-
 while True:
     if input("Если все товары добавлены, то введите символ 'q', в противном случае нажмите ENTER: ") == 'q':
         print("Итоговый список товаров")

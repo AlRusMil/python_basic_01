@@ -1,5 +1,4 @@
 text = input("Введите строку: ")
-
 list_from_text = text.split(' ')
 
 for item_index in range(len(list_from_text)):
