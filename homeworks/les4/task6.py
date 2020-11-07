@@ -20,7 +20,7 @@ start_number = 57
 stop_number = 100
 
 # Условие для остановки итератора "b"
-repeat_numbers = 10
+repeat_numbers = 15
 # Список для повторения
 list_for_repeat = [1, 2, 3, 4, 5, 6]
 
@@ -37,7 +37,7 @@ for itm in iter_count:
         break
 print("-" * 30)
 
-print("Second iterator (with cycle")
+print("Second iterator (with cycle)")
 current_repeats = 0
 for itm in iter_cycle:
     if current_repeats < repeat_numbers:
