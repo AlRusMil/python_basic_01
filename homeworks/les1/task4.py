@@ -9,3 +9,4 @@ while i < len(number):
     i += 1
 
 print("Максимальная цифра в числе: ", max_digit)
+
