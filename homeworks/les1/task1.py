@@ -1,5 +1,5 @@
 str_var_1 = "this is a string"
-int_var_1 = 11
+int_var_1 = 12
 
 print(str_var_1)
 print(int_var_1)
