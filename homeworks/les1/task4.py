@@ -8,5 +8,5 @@ while i < len(number):
         max_digit = number[i]
     i += 1
 
-print("Максимальная цифра в числе: ", max_digit)
+print("Максимальная цифра  в числе: ", max_digit)
 
