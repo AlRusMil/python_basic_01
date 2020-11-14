@@ -79,7 +79,6 @@ except ValueError as ve:
     print('1')
     print(ve)
 
-
 matrix1 = Matrix([[31, 22], [37, 43], [51, 86]])
 matrix2 = Matrix([[21, -8], [13, -3], [9, -6]])
 matrix12 = matrix1 + matrix2

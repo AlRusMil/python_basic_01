@@ -26,6 +26,7 @@ def total_tissue_volume(*args):
         result += item.clothes_tissue
     return result
 
+
 class Clothes(ABC):
 
     def __init__(self, name):
