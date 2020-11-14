@@ -17,6 +17,12 @@
 """
 
 
+def my_enumerate(iter_obj, start=0):
+    for item in iter_obj:
+        yield start, item
+        start += 1
+
+
 def my_zip(*args):
     # Минимальная длина списка из числа переданных функции
     min_len = len(sorted(args, key=len)[0])
@@ -60,7 +66,7 @@ class Matrix:
             else:
                 # Сделал с помощью list comprehensions
                 return Matrix([my_easy_map(lambda x: x[0] + x[1], my_zip(row, other.matrix_data[index]))
-                               for index, row in enumerate(self.matrix_data)])
+                               for index, row in my_enumerate(self.matrix_data)])
 
                 # Здесь более удобочитаемая реализация формирования суммы матриц
                 # matrix_sum = []
