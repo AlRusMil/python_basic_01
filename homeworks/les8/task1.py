@@ -31,7 +31,7 @@ class Date:
 
     @classmethod
     def converter(cls, date_param: str) -> dict:
-        if cls.is_valid(date_param):
+        if cls.is_valid_date(date_param):
             date_list = date_param.split('-')
             cls._dict_last_date['Year'] = int(date_list[2])
             cls._dict_last_date['Month'] = int(date_list[1])
@@ -40,40 +40,46 @@ class Date:
         else:
             raise ValueError('Incorrect format of date!\n')
 
+    # Вычисляет количество дней в месяце.
     @staticmethod
-    def is_valid(date_param: str) -> bool:
+    def days_number(month: int, year: int) -> int:
+        # Поправка на високосный год.
+        leap_year = 1 if ((year % 4 == 0) & (year % 100 != 0) | (year % 400 == 0)) else 0
+        return 28 + (month + (month // 8)) % 2 + (2 % month) + (2 - leap_year) * ((1 + leap_year) // month)
+
+    @staticmethod
+    def is_valid_date(date_param: str) -> bool:
         date_list = date_param.split('-')
 
+        # Проверяем формат даты.
         if len(date_list) != 3:
             return False
 
+        # Проверяем, что составляющие даты являются числами (положительными).
         for item in date_list:
             if not item.isdigit():
                 return False
 
         # Year
+        # Вычисляем длину года. В случае, если в двузначном формате, то дополняем до 4 цифр.
         if len(date_list[2]) == 2:
             year = int(f'{str(date.today().year)[0:2]}{date_list[2]}')
         else:
             year = int(date_list[2])
 
+        # Корректность года.
         if (year < 1900) | (year > date.today().year):
             return False
 
         # Month
+        # Корректность месяца.
         month = int(date_list[1])
         if (month <= 0) | (month > 12):
             return False
 
         # Day
-        day = int(date_list[0])
-        if (day <= 0) | (day > 31):
-            return False
-        elif (year % 4 == 0) & (month == 2) & (day > 29):
-            return False
-        elif (year % 4 != 0) & (month == 2) & (day > 28):
-            return False
-        elif (str(month) in ['4', '6', '9', '11']) & (day > 30):
+        # Корректность дня.
+        if int(date_list[0]) > Date.days_number(month, year):
             return False
 
         return True
@@ -95,12 +101,12 @@ except ValueError as ve:
 
 print('5')
 my_date = Date('10-10-2010')
-print('10-12-2019: ', Date.is_valid('10-12-2019'))
-print('43-09-2000: ', Date.is_valid('43-09-2000'))
-print('31-04-2015: ', Date.is_valid('31-04-2015'))
-print('31-05-2015: ', Date.is_valid('31-05-2015'))
-print('29-02-2003: ', my_date.is_valid('29-02-2003'))
-print('29-02-2004: ', my_date.is_valid('29-02-2004'))
+print('10-12-2019: ', Date.is_valid_date('10-12-2019'))
+print('43-09-2000: ', Date.is_valid_date('43-09-2000'))
+print('31-04-2015: ', Date.is_valid_date('31-04-2015'))
+print('31-05-2015: ', Date.is_valid_date('31-05-2015'))
+print('29-02-2003: ', my_date.is_valid_date('29-02-2003'))
+print('29-02-2004: ', my_date.is_valid_date('29-02-2004'))
 print()
 
 my_date = Date('10-34-2010')
@@ -122,5 +128,39 @@ print(Date.converter(my_date2.get_date))
 print(Date._dict_last_date)
 print(my_date._dict_last_date)
 print(my_date2._dict_last_date)
+print()
+
+print('9. Проверка правильности вычисления количества дней.')
+print('1993')
+print(Date.days_number(1, 1993))
+print(Date.days_number(2, 1993))
+print(Date.days_number(3, 1993))
+print(Date.days_number(4, 1993))
+print(Date.days_number(8, 1993))
+print(Date.days_number(9, 1993))
+print()
+print('1996')
+print(Date.days_number(1, 1996))
+print(Date.days_number(2, 1996))
+print(Date.days_number(3, 1996))
+print(Date.days_number(4, 1996))
+print(Date.days_number(8, 1996))
+print(Date.days_number(9, 1996))
+print()
+print('2000')
+print(Date.days_number(1, 2000))
+print(Date.days_number(2, 2000))
+print(Date.days_number(3, 2000))
+print(Date.days_number(4, 2000))
+print(Date.days_number(8, 2000))
+print(Date.days_number(9, 2000))
+print()
+print('2100')
+print(Date.days_number(1, 2100))
+print(Date.days_number(2, 2100))
+print(Date.days_number(3, 2100))
+print(Date.days_number(4, 2100))
+print(Date.days_number(8, 2100))
+print(Date.days_number(9, 2100))
 print()
 
